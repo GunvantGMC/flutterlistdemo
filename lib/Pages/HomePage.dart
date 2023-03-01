@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:listdemo/Models/ListTileModel.dart';
+import 'package:listdemo/Models/CstmTile.dart';
 import 'package:listdemo/Services/CstmTheme.dart';
-import 'package:listdemo/Widgets/ListCntr.dart';
+import 'package:listdemo/Widgets/CstmListTIle.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,41 +13,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<CstmListTile> tileList = [
-    CstmListTile(
-      index: 0,
-      img:
-          "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg",
-      title: "SMK",
-      color: Colors.cyan,
-    ),
-    CstmListTile(
-      index: 1,
-      img:
-          "https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg",
-      title: "PPY",
-      color: Colors.red,
-    ),
-    CstmListTile(
-      index: 2,
-      img:
-          "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg",
-      title: "CKP",
-      color: Colors.blue,
-    ),
-    CstmListTile(
-      index: 3,
-      img:
-          "https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg",
-      title: "TVP",
+  List<CstmTile> cstmTileList = [
+    CstmTile(
+      title: "Dog 1",
+      imgUrl:
+          "https://webneel.com/daily/sites/default/files/images/daily/08-2018/1-nature-photography-spring-season-mumtazshamsee.jpg",
       color: Colors.yellow,
     ),
-    CstmListTile(
-      index: 4,
-      img:
-          "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg",
-      title: "GMC",
+    CstmTile(
+      title: "Dog 2",
+      imgUrl:
+          "https://static.wixstatic.com/media/bb1bd6_bff16ec17b254ea9a802558f14af75e0~mv2.png/v1/fit/w_1000%2Ch_608%2Cal_c/file.png",
       color: Colors.green,
+    ),
+    CstmTile(
+      title: "Dog 3",
+      imgUrl:
+          "https://webneel.com/daily/sites/default/files/images/daily/08-2018/1-nature-photography-spring-season-mumtazshamsee.jpg",
+      color: Colors.pink,
+    ),
+    CstmTile(
+      title: "Dog 4",
+      imgUrl:
+          "https://static.wixstatic.com/media/bb1bd6_bff16ec17b254ea9a802558f14af75e0~mv2.png/v1/fit/w_1000%2Ch_608%2Cal_c/file.png",
+      color: Colors.cyan,
+    ),
+    CstmTile(
+      title: "Dog 5",
+      imgUrl:
+          "https://webneel.com/daily/sites/default/files/images/daily/08-2018/1-nature-photography-spring-season-mumtazshamsee.jpg",
+      color: Colors.blue,
+    ),
+    CstmTile(
+      title: "Dog 6",
+      imgUrl:
+          "https://static.wixstatic.com/media/bb1bd6_bff16ec17b254ea9a802558f14af75e0~mv2.png/v1/fit/w_1000%2Ch_608%2Cal_c/file.png",
+      color: Colors.purple,
+    ),
+    CstmTile(
+      title: "Dog 7",
+      imgUrl:
+          "https://webneel.com/daily/sites/default/files/images/daily/08-2018/1-nature-photography-spring-season-mumtazshamsee.jpg",
+      color: Colors.pinkAccent,
     ),
   ];
 
@@ -58,17 +65,15 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: CstmTheme.primaryColor,
       ),
       body: ListView.builder(
-        itemBuilder: (context, index) => ListCntr(
-          cstmListTileObj: tileList[index],
-          onDelPressed: () => removeListTile(index: index),
+        itemBuilder: (context, index) => CstmListTile(
+          cstmTile: cstmTileList[index],
+          onDelTap: () {
+            cstmTileList.removeAt(index);
+            setState(() {});
+          },
         ),
-        itemCount: tileList.length,
+        itemCount: cstmTileList.length,
       ),
     );
-  }
-
-  removeListTile({required index}) {
-    tileList.removeAt(index);
-    setState(() {});
   }
 }
