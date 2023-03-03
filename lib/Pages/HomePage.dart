@@ -13,6 +13,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool load = true;
+
+  int couter = 0;
+  
+  int index = 0;
+  
+  List <CstmList> l1 = List.empty(growable: true);
+  
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    couter = cstmTileList.length;
+    startload();
+  }
+
   List<CstmTile> cstmTileList = [
     CstmTile(
       title: "Dog 1",
@@ -64,16 +79,50 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: CstmTheme.primaryColor,
       ),
-      body: ListView.builder(
+      body: load ? CircularProgressIndicator() : cstmTileList.isEmpty ? Text("List is Empty!") : ListView.builder(
         itemBuilder: (context, index) => CstmListTile(
           cstmTile: cstmTileList[index],
           onDelTap: () {
             cstmTileList.removeAt(index);
             setState(() {});
+            
+            l1.add(cstmTileList[index]);
+            cstmTileList.removeAt(index);
+            print(index);
+            setState(() { });
           },
         ),
         itemCount: cstmTileList.length,
       ),
+      floatingActionButton: Visibility(
+        visible: couter != cstmTileList.length,
+        child: FloatingActionButton(
+          onPressed: () {
+      
+            if(l1.isNotEmpty)
+            {
+              cstmTileList.add(l1.removeLast());
+            }
+            setState(() {
+              
+            });
+          },
+          child: Icon(Icons.undo),
+        ),
     );
+  }
+  void startload() async{
+    print("Before load");
+    load = true;
+
+    setState(() {
+      
+    });
+    await Future.delayed(Duration(seconds: 5));
+    print("After load");
+    load= false;
+    setState(() {
+      
+    });
   }
 }
